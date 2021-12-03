@@ -9,7 +9,7 @@ from . import models, serializers
 
 
 @api_view(["GET"])
-@permission_classes([])
+@authentication_classes([])
 @permission_classes([])
 def user_roles_handler(request):
     user_roles = models.UserRole.objects.all()
