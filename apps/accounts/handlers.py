@@ -14,7 +14,7 @@ from . import models, serializers
 
 
 @api_view(["POST"])
-@permission_classes([])
+@authentication_classes([])
 @permission_classes([])
 def register_handler(request):
     request_data = json.loads(request.data.get("values"))
