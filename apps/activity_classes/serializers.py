@@ -12,12 +12,13 @@ class ActivityClassSerializer(ModelSerializer):
         representation = super(ActivityClassSerializer, self).to_representation(
             instance
         )
+        
         representation[
             "teacher_name"
         ] = f"{instance.teacher.staff_account.first_name} {instance.teacher.staff_account.last_name}"
         representation[
             "teacher_profile_pic"
-        ] = instance.teacher.staff_account.profile_pic.name
+        ] = instance.teacher.staff_account.profile_pic.url
         representation["class_members_data"] = KidSerializer(
             instance.class_members.all(), many=True
         ).data
@@ -45,7 +46,7 @@ class ClassActivityRatingSerializer(ModelSerializer):
         ] = f"{instance.activity_class.teacher.staff_account.first_name} {instance.activity_class.teacher.staff_account.last_name}"
         representation[
             "teacher_profile_pic"
-        ] = instance.activity_class.teacher.staff_account.profile_pic.name
+        ] = instance.activity_class.teacher.staff_account.profile_pic.url
         representation["activity_name"] = instance.activity.activity
         return representation
 
@@ -62,7 +63,7 @@ class ClassPostSerializer(ModelSerializer):
         ] = f"{instance.created_by.staff_account.first_name} {instance.created_by.staff_account.last_name}"
         representation[
             "created_by_profile"
-        ] = instance.created_by.staff_account.profile_pic.name
+        ] = instance.created_by.staff_account.profile_pic.url
         return representation
 
 
@@ -78,5 +79,5 @@ class ClassPostCommentSerializer(ModelSerializer):
         representation[
             "created_by_name"
         ] = f"{instance.created_by.first_name} {instance.created_by.last_name}"
-        representation["created_by_profile_pic"] = instance.created_by.profile_pic.name
+        representation["created_by_profile_pic"] = instance.created_by.profile_pic.url
         return representation

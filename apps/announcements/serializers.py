@@ -14,5 +14,5 @@ class AnnouncementSerializer(ModelSerializer):
         ] = f"{instance.created_by.staff_account.first_name} {instance.created_by.staff_account.last_name}"
         representation[
             "created_by_profile_pic"
-        ] = instance.created_by.staff_account.profile_pic.name
+        ] = instance.created_by.staff_account.profile_pic.url
         return representation

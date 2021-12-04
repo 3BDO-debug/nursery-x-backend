@@ -12,7 +12,7 @@ class StaffMemberSerializer(ModelSerializer):
         representaion[
             "fullname"
         ] = f"{instance.staff_account.first_name} {instance.staff_account.last_name}"
-        representaion["profile_pic"] = instance.staff_account.profile_pic.name
+        representaion["profile_pic"] = instance.staff_account.profile_pic.url
         representaion["email"] = instance.staff_account.email
         representaion["phone_num"] = instance.staff_account.phone_num
         representaion["address"] = instance.staff_account.address

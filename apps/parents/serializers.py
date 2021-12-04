@@ -11,7 +11,7 @@ class ParentSerializer(ModelSerializer):
         representation = super(ParentSerializer, self).to_representation(instance)
         representation["parent"] = {
             "fullname": f"{instance.parent_account.first_name} {instance.parent_account.last_name}",
-            "profile_pic": instance.parent_account.profile_pic.name,
+            "profile_pic": instance.parent_account.profile_pic.url,
         }
         representation["email"] = instance.parent_account.email
         representation["phone_num"] = instance.parent_account.phone_num
