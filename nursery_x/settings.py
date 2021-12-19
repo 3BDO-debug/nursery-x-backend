@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 import sys
+import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -142,7 +144,10 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
+DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES["default"] = dj_database_url.config(
+    default="postgres://kmwehbcmspbgtb:dafff7f6e9896575020f8be58d92429a558940ee3a6a5bcf051c15a98b9c06e1@ec2-54-217-232-239.eu-west-1.compute.amazonaws.com:5432/d3ghugonnfqjll"
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -182,6 +187,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static_files"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# media config
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media_files"
 
