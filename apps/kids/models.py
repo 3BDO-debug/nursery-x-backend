@@ -1,4 +1,6 @@
+import cloudinary
 from django.db import models
+from cloudinary.models import CloudinaryField
 from taggit.managers import TaggableManager
 from parents.models import Parent
 
@@ -8,9 +10,7 @@ class Kid(models.Model):
         Parent, on_delete=models.CASCADE, verbose_name="Parent account"
     )
     name = models.CharField(max_length=350, verbose_name="Name")
-    profile_pic = models.ImageField(
-        upload_to="kids_profile_pics", verbose_name="Profile pic"
-    )
+    profile_pic = CloudinaryField('image')
     birth_date = models.CharField(max_length=350, verbose_name="Birth date")
     gender = models.CharField(max_length=350, verbose_name="Gender")
     hobbies = TaggableManager(verbose_name="Hobbies")

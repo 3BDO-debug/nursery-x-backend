@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 import sys
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from datetime import timedelta
 from pathlib import Path
 
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
     "taggit",
+    "cloudinary",
     "configurations",
     "accounts",
     "kids",
@@ -115,6 +119,18 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+
+
+
+
+# cloudinary config
+cloudinary.config( 
+  cloud_name = "code-hustle",
+  api_key = "936565595835334", 
+  api_secret = "XE82GBbwB0fNEKooC2PPY2WzvaI"
+)
 
 
 # Database

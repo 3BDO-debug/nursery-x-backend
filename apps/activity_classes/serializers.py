@@ -12,7 +12,7 @@ class ActivityClassSerializer(ModelSerializer):
         representation = super(ActivityClassSerializer, self).to_representation(
             instance
         )
-        
+        representation["class_cover"] = instance.class_cover.url
         representation[
             "teacher_name"
         ] = f"{instance.teacher.staff_account.first_name} {instance.teacher.staff_account.last_name}"
@@ -29,6 +29,11 @@ class ClassActivitySerializer(ModelSerializer):
     class Meta:
         model = models.ClassActivity
         fields = "__all__"
+
+    def to_representation(self, instance):
+        representaion = super(ClassActivitySerializer, self).to_representation(instance)
+        representaion["activity_img"] = instance.activity_img.url
+        return representaion
 
 
 class ClassActivityRatingSerializer(ModelSerializer):
@@ -58,6 +63,7 @@ class ClassPostSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(ClassPostSerializer, self).to_representation(instance)
+        representation["post_attachment"] = instance.post_attachment.url
         representation[
             "created_by_name"
         ] = f"{instance.created_by.staff_account.first_name} {instance.created_by.staff_account.last_name}"

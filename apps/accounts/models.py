@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class User(AbstractUser):
@@ -16,7 +17,7 @@ class User(AbstractUser):
         max_length=350,
         verbose_name="Address",
     )
-    profile_pic = models.FileField(upload_to="user_profile_pics")
+    profile_pic = CloudinaryField('image')
 
     class Meta:
         verbose_name = "User"

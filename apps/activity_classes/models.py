@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 from staff.models import StaffMember
 from kids.models import Kid
 from accounts.models import User
@@ -9,7 +10,7 @@ class ActivityClass(models.Model):
         StaffMember, on_delete=models.CASCADE, verbose_name="Teacher"
     )
     class_name = models.CharField(max_length=350, verbose_name="Class name")
-    class_cover = models.ImageField(upload_to="activity_classes_cover_images")
+    class_cover = CloudinaryField('image')
     class_members = models.ManyToManyField(Kid, verbose_name="Class member")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created at")
 
@@ -24,9 +25,7 @@ class ActivityClass(models.Model):
 class ClassActivity(models.Model):
     activity_class = models.ForeignKey(ActivityClass, on_delete=models.CASCADE)
     activity = models.CharField(max_length=350, verbose_name="Activity")
-    activity_img = models.ImageField(
-        upload_to="class_activities_imgs", verbose_name="Activity image"
-    )
+    activity_img = CloudinaryField('image')
     starts_at = models.TimeField(verbose_name="Starts at")
 
     class Meta:
@@ -60,12 +59,7 @@ class ClassPost(models.Model):
         StaffMember, on_delete=models.CASCADE, null=True, blank=True
     )
     post_body = models.TextField(verbose_name="Post body", null=True, blank=True)
-    post_attachment = models.FileField(
-        upload_to="class_posts_attachments",
-        verbose_name="Post attachment",
-        null=True,
-        blank=True,
-    )
+    post_attachment = CloudinaryField('file')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created at")
 
     class Meta:

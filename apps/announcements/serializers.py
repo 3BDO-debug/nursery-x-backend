@@ -15,4 +15,5 @@ class AnnouncementSerializer(ModelSerializer):
         representation[
             "created_by_profile_pic"
         ] = instance.created_by.staff_account.profile_pic.url
+        representation["cover"] = instance.cover.url
         return representation

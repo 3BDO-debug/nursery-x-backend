@@ -13,6 +13,7 @@ class KidSerializer(TaggitSerializer, ModelSerializer):
 
     def to_representation(self, instance):
         representation = super(KidSerializer, self).to_representation(instance)
+        representation["profile_pic"] = instance.profile_pic.url
         representation["parent_id"] = instance.parent_account.parent_account.id
         representation[
             "parent_name"
@@ -26,5 +27,6 @@ class KidSerializer(TaggitSerializer, ModelSerializer):
         ] = instance.parent_account.parent_account.address
         representation["parent_qualification"] = instance.parent_account.qualification
         representation["parent_job"] = instance.parent_account.job
+        representation["attachment"] = instance.attachment.url
 
         return representation
