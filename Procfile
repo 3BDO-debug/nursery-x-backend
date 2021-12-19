@@ -1,0 +1,1 @@
+web: waitress-serve --port=$PORT  nursery_x.wsgi:application
