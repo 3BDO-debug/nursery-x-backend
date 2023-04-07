@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+
 import os
 import sys
 import dj_database_url
@@ -139,12 +140,8 @@ cloudinary.config(
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
-DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES["default"] = dj_database_url.config(
     default="postgres://kmwehbcmspbgtb:dafff7f6e9896575020f8be58d92429a558940ee3a6a5bcf051c15a98b9c06e1@ec2-54-217-232-239.eu-west-1.compute.amazonaws.com:5432/d3ghugonnfqjll"
 )
